@@ -1,5 +1,5 @@
-.ng-invalid.ng-touched:not(form){ 
+/* .ng-invalid.ng-touched:not(form){ 
                                     
     border: 1px solid red
-}
+} */
 /* muda borda caso campo não esteja valido após toque; not form ignora demais campos */

@@ -1,23 +1,46 @@
-<form #varLocal="ngForm" (ngSubmit)="onSubmit(varLocal)">
+<form #varLocal="ngForm" (ngSubmit)="onSubmit(varLocal)" class="form-horizontal">
  <div class="form-group">
-    <label for="name">Nome</label>
-    <input type="text" class="form-control" id="name" placeholder="Nome" name="name" ngModel
-    required #name> 
-       <div class="form-control is-invalid"
-  *ngIf="!name.valid && name.touched"> <!-- referencia id do input -->
-         Nome inválido
-     </div>
-
-   
+    <label for="name">Nome</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
+    <input type="text" class="form-control"
+    [class.is-invalid]="!name.valid && name.touched" 
+    [class.is-valid]="name.valid"
+    id="name" placeholder="Nome" name="name" ngModel required 
+    #name="ngModel">  <!--  #name ID necessário para linkar funções do bootstrap com metodos-->
+         <div class="invalid-feedback"
+         *ngIf="!name.valid && name.touched"> <!-- Msg de alerta invalid -referencia id do input -->
+            Nome inválido! 
+         </div>
+      <div class="valid-feedback"
+      *ngIf="name.valid"> <!-- Msg de valid - referencia id do input -->
+         Nome válido!
+      </div>
  </div>
+
  <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" placeholder="nome@email.com" name="email" ngModel
-    required email>
+    <input type="email" class="form-control" 
+    [class.is-invalid]="!email.valid && email.touched" 
+    [class.is-valid]="email.valid"
+    id="email" placeholder="nome@email.com" name="email" ngModel
+    required email
+      #email="ngModel"> <!--  #email ID necessário para linkar funções do bootstrap com metodos-->
     <!-- required torna campo obrigatorio // 'email' é um validator
     outro ex de email validator param="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" -->
- </div>
+    <div class="invalid-feedback"
+    *ngIf="!email.valid && email.touched"> <!-- Msg de alerta invalid -referencia id do input -->
+       Email inválido! 
+    </div>
+    <div class="valid-feedback"
+    *ngIf="email.valid"> <!-- Msg de valid - referencia id do input -->
+       Email válido!
+    </div>
 
- <button type="submit" class="btn btn-primary">Submit</button>
+ </div>
+ 
+ <button type="submit" class="btn btn-primary" 
+   [disabled]="!varLocal.valid">Submit</button>
+
 
 </form>
+
+

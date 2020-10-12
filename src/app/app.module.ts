@@ -8,6 +8,9 @@ import { ReativoComponent } from './reativo/reativo.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TemplateDrivenModule } from './template-driven/template-driven.module'
+
+
 
 
 
@@ -22,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TemplateDrivenModule
   ],
   providers: [],
   bootstrap: [AppComponent]
