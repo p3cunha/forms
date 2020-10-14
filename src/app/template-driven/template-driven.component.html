@@ -1,45 +1,145 @@
-<form #varLocal="ngForm" (ngSubmit)="onSubmit(varLocal)" class="form-horizontal">
- <div class="form-group">
+<form #varForm="ngForm" (ngSubmit)="onSubmit(varForm)">
+   <div class="content" style="display: flex; justify-content: center; flex-direction: column;">
+ <div class="form-group" style="margin-top: 20px;">
     <label for="name">Nome</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
-    <input type="text" class="form-control"
-    [class.is-invalid]="!name.valid && name.touched" 
-    [class.is-valid]="name.valid"
+    <input type="text" class="form-control"   [ngClass]="appBootstrapValidInvalid(name)"
     id="name" placeholder="Nome" name="name" ngModel required 
     #name="ngModel">  <!--  #name ID necessário para linkar funções do bootstrap com metodos-->
-         <div class="invalid-feedback"
-         *ngIf="!name.valid && name.touched"> <!-- Msg de alerta invalid -referencia id do input -->
+         <div class="invalid-feedback" *ngIf="!name.valid && name.touched"> <!-- Msg de alerta invalid -referencia id do input -->
             Nome inválido! 
          </div>
-      <div class="valid-feedback"
-      *ngIf="name.valid"> <!-- Msg de valid - referencia id do input -->
-         Nome válido!
-      </div>
+          <div class="valid-feedback" *ngIf="name.valid"> <!-- Msg de valid - referencia id do input -->
+            Nome válido!
+          </div>
+   
  </div>
 
- <div class="form-group">
+ <div class="form-group"> 
+  
     <label for="email">Email</label>
-    <input type="email" class="form-control" 
-    [class.is-invalid]="!email.valid && email.touched" 
-    [class.is-valid]="email.valid"
-    id="email" placeholder="nome@email.com" name="email" ngModel
-    required email
-      #email="ngModel"> <!--  #email ID necessário para linkar funções do bootstrap com metodos-->
+
+      <input type="email" class="form-control" [ngClass]="appBootstrapValidInvalid(email)"
+         id="email" placeholder="nome@email.com" name="email" ngModel
+            required email
+                #email="ngModel"> <!--  #email ID necessário para linkar funções do bootstrap com metodos-->
     <!-- required torna campo obrigatorio // 'email' é um validator
-    outro ex de email validator param="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" -->
-    <div class="invalid-feedback"
-    *ngIf="!email.valid && email.touched"> <!-- Msg de alerta invalid -referencia id do input -->
-       Email inválido! 
-    </div>
-    <div class="valid-feedback"
-    *ngIf="email.valid"> <!-- Msg de valid - referencia id do input -->
-       Email válido!
-    </div>
-
+    outro ex de email validator: param="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" -->
+      <div class="invalid-feedback"*ngIf="!email.valid && email.touched"> 
+         Email inválido! 
+      </div>
+      <div class="valid-feedback" *ngIf="email.valid"> 
+         Email válido!
+      </div>
+   
  </div>
- 
- <button type="submit" class="btn btn-primary" 
-   [disabled]="!varLocal.valid">Submit</button>
 
+ <div ngModelGroup="endereco">
+
+<div class="form-group" style="margin-top: 20px;">
+   <div class="form-row">
+      <div class="col-md-3">
+         <label for="cep">CEP</label>
+         <input type="text" class="form-control"  [ngClass]="appBootstrapValidInvalid(cep)"
+             placeholder="CEP" name="cep" ngModel
+               required (blur)="verificarCEP($event.target.value, varForm)"
+                   #cep="ngModel"> 
+         <div class="invalid-feedback" *ngIf="!cep.valid && cep.touched"> 
+            CEP inválido! 
+         </div>   
+         <div class="valid-feedback" *ngIf="cep.valid"> 
+               CEP válido!
+         </div>
+      </div>
+
+      <div class="col-md-3">
+         <label for="numero">Número</label>
+         <input type="text" class="form-control" [ngClass]="appBootstrapValidInvalid(numero)"
+             placeholder="Número" name="numero" ngModel
+               required
+                   #numero="ngModel"> 
+         <div class="invalid-feedback" *ngIf="!numero.valid && numero.touched"> 
+            Número inválido! 
+         </div>
+         <div class="valid-feedback" *ngIf="numero.valid"> 
+            Número válido!
+         </div>
+      </div>
+
+      <div class="col-md-6">
+         <label for="complemento">Complemento</label>
+         <input type="text" class="form-control" 
+             placeholder="Complemento" name="complemento" ngModel
+                   #complemento="ngModel"> 
+      </div>
+   </div>
+</div>
+      
+   <div class="form-group" style="margin-top: 20px;">
+         <label for="rua">Rua</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
+         <input type="text" class="form-control"   [ngClass]="appBootstrapValidInvalid(rua)"
+         id="rua" placeholder="Rua" name="rua" ngModel required 
+         #rua="ngModel">  <!--  #rua ID necessário para linkar funções do bootstrap com metodos-->
+              <div class="invalid-feedback" *ngIf="!rua.valid && rua.touched"> <!-- Msg de alerta invalid -referencia id do input -->
+                 Rua inválida! 
+              </div>
+               <div class="valid-feedback" *ngIf="rua.valid"> <!-- Msg de valid - referencia id do input -->
+                 Rua válida!
+               </div>
+        
+   </div>
+  
+ <div class="form-group" style="margin-top: 20px; ">
+   <div class="form-row" >
+   <div class="col-md-6">
+      <label for="bairro">Bairro</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
+      <input type="text" class="form-control"[ngClass]="appBootstrapValidInvalid(bairro)"
+      id="bairro" placeholder="Bairro" name="bairro" ngModel required 
+      #bairro="ngModel">  
+           <div class="invalid-feedback" *ngIf="!bairro.valid && bairro.touched"> 
+              Bairro inválido! 
+           </div>
+            <div class="valid-feedback" *ngIf="bairro.valid">
+           Bairro válido!
+            </div>
+     </div>
+
+     <div class="col-md-4">
+    <label for="cidade">Cidade</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
+    <input type="text" class="form-control" [ngClass]="appBootstrapValidInvalid(cidade)"
+    id="cidade" placeholder="Cidade" name="cidade" ngModel required 
+    #cidade="ngModel">  
+         <div class="invalid-feedback" *ngIf="!cidade.valid && cidade.touched"> 
+            Cidade inválida! 
+         </div>
+          <div class="valid-feedback" *ngIf="cidade.valid">
+         Cidade válida!
+          </div>
+   </div>
+
+   <div class="col-md-2">
+      <label for="estado">Estado</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
+      <input type="text" class="form-control" [ngClass]="appBootstrapValidInvalid(estado)"
+      id="estado" placeholder="Estado" name="estado" ngModel required 
+      #estado="ngModel">  
+           <div class="invalid-feedback"
+           *ngIf="!estado.valid && estado.touched"> 
+              Estado inválido! 
+           </div>
+            <div class="valid-feedback"
+              *ngIf="estado.valid">
+           Estado válido!
+            </div>
+     </div>
+
+   </div>
+</div>
+</div>
+</div>
+
+
+
+ <button type="submit" class="btn btn-primary mt-10" 
+   [disabled]="!varForm.valid">Submit</button>
 
 </form>
 

@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ReativoComponent } from './reativo/reativo.component';
+import { ReactiveFormComponent } from './reactive-form/reactive-form.component'
+
 import { TemplateDrivenComponent } from './template-driven/template-driven.component';
 
 const routes: Routes = [
   { path: 'template-driven', component: TemplateDrivenComponent },
-  { path: 'reativo', component: ReativoComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'template-driven' }
+  { path: 'reactive-form', component: ReactiveFormComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'reactive-form' }
 ];
 
 @NgModule({
