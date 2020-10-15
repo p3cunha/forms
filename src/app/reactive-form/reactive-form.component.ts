@@ -32,11 +32,11 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.form)    //fake API integration
+    console.log(this.form)    //API integration
     this.http.post('https://httpbin.org/post', JSON.stringify(this.form.value))   
     .subscribe(data => {
       console.log(data);
-      this.form.reset()         //reset form after submit
+      this.resetForm()        //reset form after submit
     },
     (error:any) => alert('erro') ) // alert in error
     
@@ -46,18 +46,18 @@ export class ReactiveFormComponent implements OnInit {
     this.form.reset()
   }
 
-  bootstrapInvalid(campo){
+  bootstrapInvalid(campo){ // return if input isn't valid and was touched
     return !this.form.get(campo).valid && this.form.get(campo).touched 
   }
-  bootstrapValid(campo){
+  bootstrapValid(campo){ // return if input is valid
     return this.form.get(campo).valid
   }
 
-  cssValidInvalid(campo){ 
+  cssValidInvalid(campo){ // return string that will modify input class
       if (this.bootstrapInvalid(campo)){
-       return  'is-invalid'}
+       return  'is-invalid'} // class that will change css to invalid
       else if (this.bootstrapValid(campo)){
-        return 'is-valid' }
+        return 'is-valid' } // class that will change css to valid
     }
 
     preencherCEP(){
@@ -72,7 +72,7 @@ export class ReactiveFormComponent implements OnInit {
         }
       }
 
-      cepFill(data){
+      cepFill(data){ // fill inputs with data received from API
         this.form.patchValue({
           endereco: ({
         bairro: data.bairro,
