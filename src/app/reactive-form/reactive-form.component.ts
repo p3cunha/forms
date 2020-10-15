@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 import { DropdownEstadosBR } from '../shared/dropdownEstadosBR/dropdown-estados-br.model';
 import { DropdownService } from '../shared/dropdownServices/dropdown.service';
@@ -13,8 +14,10 @@ import { VerifyCepService } from '../shared/verify-cep.service';
 })
 export class ReactiveFormComponent implements OnInit {
 
+  
   form: FormGroup
-  estadosBR: DropdownEstadosBR[] // import interface as array
+  // estadosBR: DropdownEstadosBR[] // import interface as array
+     estados : Observable<DropdownEstadosBR[]>
 
   constructor(private formBuilder : FormBuilder,
               private http : HttpClient,
@@ -37,8 +40,9 @@ export class ReactiveFormComponent implements OnInit {
       })
     })
    
-    this.dropdownService.getEstadosBr() // import JSON list of statesBR as observable
-    .subscribe(data => {this.estadosBR = data, console.log(data)}) //each array of estadosBR receive data of JSON, totalizing 27 items
+    // this.estados = this.dropdownService.getEstadosBr()
+    // this.dropdownService.getEstadosBr() // import JSON list of statesBR as observable
+    // .subscribe(data => {this.estadosBR = data, console.log(data)}) //each array of estadosBR receive data of JSON, totalizing 27 items
   }
 
   onSubmit(){

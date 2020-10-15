@@ -102,9 +102,10 @@
        </div>
     
        <div class="col-md-2">
-          <label for="estado">Estado</label> 
-          <input type="text" class="form-control" [ngClass]="cssValidInvalid('endereco.estado')"
-          id="estado" placeholder="Estado" formControlName="estado">  
+          <label for="estado" class="control-label">Estado</label>
+          <select  class="form-control" id="estado"  formControlName="estado">
+          <option *ngFor="let estado of estados | async" [value]="estado.sigla">  {{ estado.nome }} </option>
+         </select> 
             <div class="invalid-feedback" *ngIf="bootstrapInvalid('endereco.estado')"> 
                 Estado inválido! 
             </div>
