@@ -30,7 +30,7 @@ export class TemplateDrivenComponent implements OnInit {
     return campo.valid // campo valido
   }
 
-  appBootstrapValidInvalid(campo){ // retorna string para ngClass aplicar conforme status do campo (#ID) recebido 
+  cssValidInvalid(campo){ // retorna string para ngClass aplicar conforme status do campo (#ID) recebido 
     return {
     'is-invalid': this.bootstrapInvalid(campo),
     'is-valid':  this.bootstrapValid(campo)

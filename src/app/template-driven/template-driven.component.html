@@ -2,7 +2,7 @@
    <div class="content" style="display: flex; justify-content: center; flex-direction: column;">
  <div class="form-group" style="margin-top: 20px;">
     <label for="name">Nome</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
-    <input type="text" class="form-control"   [ngClass]="appBootstrapValidInvalid(name)"
+    <input type="text" class="form-control"   [ngClass]="cssValidInvalid(name)"
     id="name" placeholder="Nome" name="name" ngModel required 
     #name="ngModel">  <!--  #name ID necessário para linkar funções do bootstrap com metodos-->
          <div class="invalid-feedback" *ngIf="!name.valid && name.touched"> <!-- Msg de alerta invalid -referencia id do input -->
@@ -18,7 +18,7 @@
   
     <label for="email">Email</label>
 
-      <input type="email" class="form-control" [ngClass]="appBootstrapValidInvalid(email)"
+      <input type="email" class="form-control" [ngClass]="cssValidInvalid(email)"
          id="email" placeholder="nome@email.com" name="email" ngModel
             required email
                 #email="ngModel"> <!--  #email ID necessário para linkar funções do bootstrap com metodos-->
@@ -39,7 +39,7 @@
    <div class="form-row">
       <div class="col-md-3">
          <label for="cep">CEP</label>
-         <input type="text" class="form-control"  [ngClass]="appBootstrapValidInvalid(cep)"
+         <input type="text" class="form-control"  [ngClass]="cssValidInvalid(cep)"
              placeholder="CEP" name="cep" ngModel
                required (blur)="verificarCEP($event.target.value, varForm)"
                    #cep="ngModel"> 
@@ -53,7 +53,7 @@
 
       <div class="col-md-3">
          <label for="numero">Número</label>
-         <input type="text" class="form-control" [ngClass]="appBootstrapValidInvalid(numero)"
+         <input type="text" class="form-control" [ngClass]="cssValidInvalid(numero)"
              placeholder="Número" name="numero" ngModel
                required
                    #numero="ngModel"> 
@@ -76,7 +76,7 @@
       
    <div class="form-group" style="margin-top: 20px;">
          <label for="rua">Rua</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
-         <input type="text" class="form-control"   [ngClass]="appBootstrapValidInvalid(rua)"
+         <input type="text" class="form-control"   [ngClass]="cssValidInvalid(rua)"
          id="rua" placeholder="Rua" name="rua" ngModel required 
          #rua="ngModel">  <!--  #rua ID necessário para linkar funções do bootstrap com metodos-->
               <div class="invalid-feedback" *ngIf="!rua.valid && rua.touched"> <!-- Msg de alerta invalid -referencia id do input -->
@@ -92,7 +92,7 @@
    <div class="form-row" >
    <div class="col-md-6">
       <label for="bairro">Bairro</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
-      <input type="text" class="form-control"[ngClass]="appBootstrapValidInvalid(bairro)"
+      <input type="text" class="form-control"[ngClass]="cssValidInvalid(bairro)"
       id="bairro" placeholder="Bairro" name="bairro" ngModel required 
       #bairro="ngModel">  
            <div class="invalid-feedback" *ngIf="!bairro.valid && bairro.touched"> 
@@ -105,7 +105,7 @@
 
      <div class="col-md-4">
     <label for="cidade">Cidade</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
-    <input type="text" class="form-control" [ngClass]="appBootstrapValidInvalid(cidade)"
+    <input type="text" class="form-control" [ngClass]="cssValidInvalid(cidade)"
     id="cidade" placeholder="Cidade" name="cidade" ngModel required 
     #cidade="ngModel">  
          <div class="invalid-feedback" *ngIf="!cidade.valid && cidade.touched"> 
@@ -118,7 +118,7 @@
 
    <div class="col-md-2">
       <label for="estado">Estado</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
-      <input type="text" class="form-control" [ngClass]="appBootstrapValidInvalid(estado)"
+      <input type="text" class="form-control" [ngClass]="cssValidInvalid(estado)"
       id="estado" placeholder="Estado" name="estado" ngModel required 
       #estado="ngModel">  
            <div class="invalid-feedback"

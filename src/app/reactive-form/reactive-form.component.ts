@@ -17,8 +17,17 @@ export class ReactiveFormComponent implements OnInit {
   ngOnInit(): void {
     
     this.form = this.formBuilder.group({ //form's logic. Called by formControlName
-      nome: [null, [Validators.required, Validators.minLength(3)]],
-      email: [null, [Validators.required, Validators.email]],
+      nome: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      endereco: this.formBuilder.group({
+        cep: ['', [Validators.required]],
+        numero: ['', [Validators.required]],
+        complemento: [''],
+        rua: ['', [Validators.required]],
+        bairro: ['', [Validators.required]],
+        cidade: ['', [Validators.required]],
+        estado: ['', [Validators.required]],
+      })
     })
   }
 
@@ -37,4 +46,46 @@ export class ReactiveFormComponent implements OnInit {
     this.form.reset()
   }
 
+  bootstrapInvalid(campo){
+    return !this.form.get(campo).valid && this.form.get(campo).touched 
+  }
+  bootstrapValid(campo){
+    return this.form.get(campo).valid
+  }
+
+  cssValidInvalid(campo){ 
+      if (this.bootstrapInvalid(campo)){
+       return  'is-invalid'}
+      else if (this.bootstrapValid(campo)){
+        return 'is-valid' }
+    }
+
+    preencherCEP(){
+      let cep = this.form.get('endereco.cep').value
+      //Nova variável "cep" somente com dígitos.
+        cep = cep.replace(/\D/g, '');
+        //Verifica se campo cep possui valor informado.
+        if (cep !== '') {
+          //Consulta o webservice viacep.com.br/
+            this.http.get(`https://viacep.com.br/ws/${cep}/json`)
+              .subscribe(data => this.cepFill(data));
+        }
+      }
+
+      cepFill(data){
+        this.form.patchValue({
+          endereco: ({
+        bairro: data.bairro,
+        cep: data.cep,
+        cidade: data.localidade,
+        rua: data.logradouro,
+        estado: data.uf
+      })
+          })
+    }
+
+
+
 }
+
+

@@ -1,28 +1,124 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
+    <div class="content" >
+  <div class="form-group" style="margin-top: 20px;">
+     <label for="name">Nome</label>  
+     <input type="text" class="form-control" formControlName="nome" 
+      [ngClass]="cssValidInvalid('nome')"
+     id="name" placeholder="Nome" required>  
+     <div class="invalid-feedback" *ngIf="bootstrapInvalid('nome')"> 
+        Nome inválido! 
+     </div>
+      <div class="valid-feedback" *ngIf="bootstrapValid('nome')">
+        Nome válido!
+      </div>
+  </div>
+ 
+  <div class="form-group"> 
+     <label for="email">Email</label>
+       <input type="email" class="form-control"  formControlName="email"
+       [ngClass]="cssValidInvalid('email')" id="email" placeholder="nome@email.com" required>
+       <div class="invalid-feedback" *ngIf="bootstrapInvalid('email')"> 
+        Email inválido! 
+     </div>
+      <div class="valid-feedback" *ngIf="bootstrapValid('email')">
+        Email válido!
+      </div>
+  </div>
+
+  <div formGroupName="endereco">
+
     <div class="form-group" style="margin-top: 20px;">
-        <div class="input-section">
-            <input type="text" class="input-name"   autocomplete="off"
-            id="name" placeholder=" " formControlName="nome"> 
-            <label for="name" class="label-area">
-                <span class="label-span">Nome</span>
-            </label> 
-        </div>
+       <div class="form-row">
+          <div class="col-md-3">
+             <label for="cep">CEP</label>
+             <input type="text" class="form-control"  [ngClass]="cssValidInvalid('endereco.cep')"  (blur)="preencherCEP()"
+                 placeholder="CEP" formControlName="cep">
+                    <div class="invalid-feedback" *ngIf="bootstrapInvalid('endereco.cep')"> 
+                        CEP inválido! 
+                    </div>
+                    <div class="valid-feedback" *ngIf="bootstrapValid('endereco.cep')">
+                        CEP válido!
+                    </div>
+          </div>
+    
+          <div class="col-md-3">
+             <label for="numero">Número</label>
+             <input type="text" class="form-control" [ngClass]="cssValidInvalid('endereco.numero')"
+                 placeholder="Número" formControlName="numero"> 
+                    <div class="invalid-feedback" *ngIf="bootstrapInvalid('endereco.numero')"> 
+                        Número inválido! 
+                    </div>
+                    <div class="valid-feedback" *ngIf="bootstrapValid('endereco.numero')">
+                        Número válido!
+                    </div>
+          </div>
+    
+          <div class="col-md-6">
+             <label for="complemento">Complemento</label>
+             <input type="text" class="form-control" 
+                 placeholder="Complemento"> 
+          </div>
+       </div>
+    </div>
+          
+       <div class="form-group" style="margin-top: 20px;">
+             <label for="rua">Rua</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
+             <input type="text" class="form-control"   [ngClass]="cssValidInvalid('endereco.rua')"
+             id="rua" placeholder="Rua" formControlName="rua">  
+             <div class="invalid-feedback" *ngIf="bootstrapInvalid('endereco.rua')"> 
+                Rua inválido! 
+             </div>
+              <div class="valid-feedback" *ngIf="bootstrapValid('endereco.rua')">
+                Rua válido!
+              </div>
+            
+       </div>
       
+     <div class="form-group" style="margin-top: 20px; ">
+       <div class="form-row" >
+       <div class="col-md-6">
+          <label for="bairro">Bairro</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
+          <input type="text" class="form-control"[ngClass]="cssValidInvalid('endereco.bairro')"
+          id="bairro" placeholder="Bairro" formControlName="bairro">  
+          <div class="invalid-feedback" *ngIf="bootstrapInvalid('endereco.bairro')"> 
+            Bairro inválido! 
+         </div>
+          <div class="valid-feedback" *ngIf="bootstrapValid('endereco.bairro')">
+            Bairro válido!
+          </div>
+         </div>
+    
+         <div class="col-md-4">
+        <label for="cidade">Cidade</label>  <!-- [class.] altera estilo da box caso valid/invalid -->
+        <input type="text" class="form-control" [ngClass]="cssValidInvalid('endereco.cidade')"
+        id="cidade" placeholder="Cidade" formControlName="cidade">  
+        <div class="invalid-feedback" *ngIf="bootstrapInvalid('endereco.cidade')"> 
+            Cidade inválido! 
+         </div>
+          <div class="valid-feedback" *ngIf="bootstrapValid('endereco.cidade')">
+            Cidade válido!
+          </div>
+       </div>
+    
+       <div class="col-md-2">
+          <label for="estado">Estado</label> 
+          <input type="text" class="form-control" [ngClass]="cssValidInvalid('endereco.estado')"
+          id="estado" placeholder="Estado" formControlName="estado">  
+            <div class="invalid-feedback" *ngIf="bootstrapInvalid('endereco.estado')"> 
+                Estado inválido! 
+            </div>
+            <div class="valid-feedback" *ngIf="bootstrapValid('endereco.estado')">
+                Estado válido!
+            </div>
+         </div>
+    
+       </div>
+    </div>
     </div>
 
-    <div class="form-group" > 
-        <div class="input-section">
-            <input type="email" class="input-email"  autocomplete="off"
-            id="email" placeholder=" " formControlName="email" > 
-            <label for="email" class="label-area">
-                <span class="label-span">Email</span>
-            </label>
-        </div>
-    </div>
+  </div>
 
-            <button type="submit" 
-            class="btn btn-primary mt-10">  Submit  </button>
-
-            <button class="btn btn-danger m-2" (click)="resetForm()">  Cancelar  </button>
+  <button type="submit" class="btn btn-danger" style="margin: 5px;">Submit</button>
+  <button (click)="resetForm()"  class="btn btn-primary m-10">Reset</button>
 </form>
