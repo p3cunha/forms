@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ReactiveFormComponent } from './reactive-form.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -12,7 +13,8 @@ import { ReactiveFormComponent } from './reactive-form.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class ReactiveFormModule { }
