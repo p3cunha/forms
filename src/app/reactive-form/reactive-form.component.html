@@ -104,7 +104,7 @@
        <div class="col-md-2">
           <label for="estado" class="control-label">Estado</label>
           <select  class="form-control" id="estado"  formControlName="estado">
-          <option *ngFor="let estado of estados | async" [value]="estado.sigla">  {{ estado.nome }} </option>
+          <option *ngFor="let estado of estados | async" [value]="estado.sigla">  {{ estado.sigla }} </option>
          </select> 
             <div class="invalid-feedback" *ngIf="bootstrapInvalid('endereco.estado')"> 
                 Estado inválido! 
@@ -117,6 +117,15 @@
        </div>
     </div>
     </div>
+
+    <div id="civil" class="custom-control custom-radio custom-control-inline">
+      <label for="civil">Estado civil: </label>
+      <div class="col-md-2" *ngFor="let item of civis">
+            <input type="radio" [value]="item.valor" formControlName="civil"> 
+            {{ item.valor }}
+        
+      </div>
+   </div>
 
   </div>
 

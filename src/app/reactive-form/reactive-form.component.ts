@@ -18,6 +18,7 @@ export class ReactiveFormComponent implements OnInit {
   form: FormGroup
   // estadosBR: DropdownEstadosBR[] // import interface as array
      estados : Observable<DropdownEstadosBR[]>
+     civis: any[]
 
   constructor(private formBuilder : FormBuilder,
               private http : HttpClient,
@@ -36,11 +37,15 @@ export class ReactiveFormComponent implements OnInit {
         rua: ['', [Validators.required]],
         bairro: ['', [Validators.required]],
         cidade: ['', [Validators.required]],
-        estado: ['', [Validators.required]],
-      })
+        estado: ['', [Validators.required]]
+      }),
+      civil: [null]
     })
    
-    // this.estados = this.dropdownService.getEstadosBr()
+    
+   this.estados = this.dropdownService.getEstadosBr()
+   this.civis = this.dropdownService.getCivil()
+
     // this.dropdownService.getEstadosBr() // import JSON list of statesBR as observable
     // .subscribe(data => {this.estadosBR = data, console.log(data)}) //each array of estadosBR receive data of JSON, totalizing 27 items
   }
@@ -111,6 +116,8 @@ export class ReactiveFormComponent implements OnInit {
             })
           })
       }
+
+ 
 }
 
 
